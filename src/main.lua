@@ -1,4 +1,4 @@
 local function main()
-  print("OK")
+  print("OK com remote")
 end
 main()

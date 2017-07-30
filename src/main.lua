@@ -1,3 +1,4 @@
+--- Test
 local ctg = require "luangs.fn.category"
 local function showErr(err)
   print ("Error: " + err)

@@ -1,32 +1,29 @@
---[[**************************************************************************
- * TypeLib.lua
- *
- *  Type library
- *   
- *  http://www.lags.pro.br
- *
- *  Luiz Antonio Garcia Simões (LAGS)
- *
- *  This file is free for use of any kind and is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
- *
- *****************************************************************************
- *--]]
---[[
-* ensureAny function - Same as id function. Returns the first parameter.
-* @author   LAGS luiz@lags.pro.br
-* 
-* @param {any} a verifier type function (ensureNumber(obj), ensureString, etc.).
-* @return {any} The first parameter.
---]]
+--- --------------------------------------------------------------------------
+-- @name luangs.fn.type
+-- 
+-- @description Type library
+--   
+--  http://www.lags.pro.br
+--
+--  @author Luiz Antonio Garcia Simões (LAGS)
+--
+--  @This file is free for use of any kind and is distributed on an "AS IS" BASIS,
+--  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+--
+-- 
+--  --------------------------------------------------------------------------
+--
+
+---
+-- @name function - Same as id function. Returns the first parameter.
+-- @param val any value
+-- @return val
 local function ensureAny(val) return val end
 
---[[ makeTypeVerifier function - make a type  verifier
-* @author   LAGS luiz@lags.pro.br
-* 
-* @param {string} a type.
-* @return {function} function that returns 'true' if obj is ofunctof type  else 'false'.
---]]
+---
+-- @name makeTypeVerifier - Makes a function that verifies a param type
+-- @param aType (string) A valid Lua type name
+-- @return a function thate verifies the given type
 local function makeTypeVerifier(aType)
   if aType ~= "nil"    and aType ~= "number"   and aType ~= "boolean" and 
      aType ~= "string" and aType ~= "function" and aType ~= "userdata" and
@@ -37,31 +34,24 @@ local function makeTypeVerifier(aType)
   local function ret(val) return type(val) == aType end 
   return ret
 end
---[[ makeEnsureType function - make a object type ensurance
-* @author   LAGS luiz@lags.pro.br
-* 
-* @param {string} a type.
-* @return {function} function tnilhat returns the value or error if not of type.
---]]
+---
+-- @name makeEnsureType - Makes a function that verifies a param type
+-- @param aType (string) A valid Lua type name
+-- @return a function thate verifies the given type
 local function makeEnsureType(aType)
-  local verifier 
-  status, err = pcall(function () verifier = makeTypeVerifier(aType) end) 
-  if err then
-    error(err, 2)
-  else
-    local function ret(val)
-      if verifier(val) then
-        return val
+  local  verifier = makeTypeVerifier(aType) 
+  local function ret(val)
+    if verifier(val) then
+      return val
+    else
+      if val then
+        error(val ..  " is a '" .. type(val) .. "', not a '" .. aType .."'",2)
       else
-        if val then
-          error(val ..  " is a '" .. type(val) .. "', not a '" .. aType .."'",2)
-        else
-          error("nil value ', not a '" .. aType .."'", 2)
-        end
+        error("nil value ', not a '" .. aType .."'", 2)
       end
     end
-    return ret
   end
+  return ret
 end
 --[[ is[Type] function - ask if a value [type] 
 * @author   LAGS luiz@lags.pro.br
@@ -648,8 +638,8 @@ local function makeEnsureNotEqualThan(val)
 end
 
 local function makeEnsureBetweenThan(a, b)
-  local function ret(other) 
-    if other <= b and other >= a then
+  local function ret(other) makeTypeVerifier(aType)
+    if other <= b and other >= a then  
       return other
     else
       error(other .. " is not between " .. a .. " and " .. b, 2)
@@ -705,6 +695,7 @@ local function ensureIsSatifyingAll(...)
 end
 
 return {
+  ensureAny = ensureAny,
   makeTypeVerifier = makeTypeVerifier,
   makeEnsureType = makeEnsureType,
   isNil = isNil,

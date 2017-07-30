@@ -7,7 +7,7 @@
 --
 --  @author Luiz Antonio Garcia Simões (LAGS)
 --
---  @This file is free for use of any kind and is distributed on an "AS IS" BASIS,
+--  This file is free for use of any kind and is distributed on an "AS IS" BASIS,
 --  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
 --
 -- 

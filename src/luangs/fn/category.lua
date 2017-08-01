@@ -34,8 +34,8 @@ local function makeTypeVerifier(aType)
   local function ret(val) return type(val) == aType end 
   return ret
 end
----
--- @name makeEnsureType - Makes a function that verifies a param type
+---verifies a param type
+-- @name makeEnsureType - Makes a function that veriverifies a param typefies a param type
 -- @param aType (string) A valid Lua type name
 -- @return a function thate verifies the given type
 local function makeEnsureType(aType)
@@ -53,14 +53,41 @@ local function makeEnsureType(aType)
   end
   return ret
 end
---[[ is[Type] function - ask if a value [type] 
-* @author   LAGS luiz@lags.pro.br
-* 
-* @param {any} val.
-* @return {boolean} returns true or false.
---]]
+---
+-- @name isNil - Verifies if a value is nil
+-- @param val (any) A value
+-- @return a boolean indicating if the value is nil
 local function isNil (val) return type(val) == 'nil' end
+---
+-- @name ensureNil - Makes a function that returns param if param is nil else error
+-- @param val (any) A value
+-- @return val (any)
+--
+local function ensureNil (val) 
+  if isNil(val) then
+    return nil
+  else
+    error("The value is not nil.", 2)
+  end
+end
+---
+-- @name isNumber - Verifies if a value is number
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a number
 local function isNumber (val) return type(val) == 'number' end
+
+---
+-- @name ensureNumber - Makes a function that returns param if param is number else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureNumber (val) 
+  if isNumber(val) then
+    return val
+  else
+    error("The value is not a number.", 2)
+  end
+end
+
 local function isString (val) return type(val) == 'string' end
 local function isBoolean (val) return type(val) == 'boolean' end
 local function isUserdata (val) return type(val) == 'userdata' end
@@ -364,28 +391,7 @@ local function makeKeyValueTypeCheck(k, fnIsTypeOf)
     error("The param key is not an not empty string.", 2)
   end
 end
---[[ ensure[Type] function - asunpk if a value [type] functo
-* @author   LAGS luiz@lags.pro.br
-* np
-* @param {any} val.
-* @return {any} returns val or error if not of atype.
---]]
 
-local function ensureNil (val) 
-  if isNil(val) then
-    return nil
-  else
-    error("The value is not nil.", 2)
-  end
-end
-
-local function ensureNumber (val) 
-  if isNumber(val) then
-    return val
-  else
-    error("The value is not a number.", 2)
-  end
-end
 
 local function ensureString (val) 
   if isString(val) then

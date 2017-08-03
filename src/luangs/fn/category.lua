@@ -59,7 +59,7 @@ end
 -- @return a boolean indicating if the value is nil
 local function isNil (val) return type(val) == 'nil' end
 ---
--- @name ensureNil - Makes a function that returns param if param is nil else error
+-- @name ensureNil - Function that returns param if param is nil else error
 -- @param val (any) A value
 -- @return val (any)
 --
@@ -77,7 +77,7 @@ end
 local function isNumber (val) return type(val) == 'number' end
 
 ---
--- @name ensureNumber - Makes a function that returns param if param is number else error
+-- @name ensureNumber - Function that returns param if param is number else error
 -- @param val (any) A value
 -- @return val(any)
 local function ensureNumber (val) 
@@ -88,25 +88,141 @@ local function ensureNumber (val)
   end
 end
 
+---
+-- @name isString - Verifies if a value is a string
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a string
 local function isString (val) return type(val) == 'string' end
+
+---
+-- @name ensureString - Function that returns param if param is a string else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureString (val) 
+  if isString(val) then
+    return val
+  else
+    error("The value is not a string.", 2)
+  end
+end
+
+---
+-- @name isString - Verifies if a value is a string
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a boolean
 local function isBoolean (val) return type(val) == 'boolean' end
+
+---
+-- @name ensureBoolean - Function that returns param if param is a boolean else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureBoolean (val) 
+  if isBoolean(val) then
+    return val
+  else
+    error("The value is not a boolean.", 2)
+  end
+end
+
+---
+-- @name isUserdata - Verifies if a value is a userdata
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a userdata
 local function isUserdata (val) return type(val) == 'userdata' end
+
+---
+-- @name ensureUserdata - Function that returns param if param is a userdata else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureUserdata (val) 
+  if isUserdata(val) then
+    return val
+  else
+    error("The value is not a userdata.", 2)
+  end
+end
+
+---
+-- @name isTable - Verifies if a value is a table
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a table
 local function isTable (val) return type(val) == 'table' end
+
+---
+-- @name ensureTable - Function that returns param if param is a table else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureTable (val) 
+  if isTable(val) then
+    return val
+  else
+    error("The value is not a table.", 2)
+  end
+end
+
+---
+-- @name isFunction - Verifies if a value is a function
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a table
 local function isFunction(val) return type(val) == 'function' end
 
+---
+-- @name ensureFunction - Function that returns param if param is a function else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureFunction(val)
+  if isFunction(val) then
+    return val
+  else
+    error("The value is not a function.",2)
+  end
+end
+
+---
+-- @name isInteger - Verifies if a value is a integer
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a integer number
 local function isInteger(val) 
   if isNumber(val) then
-    return (val % 0) == 0  
+    return math.floor(val) == val  
   else
     return false
   end
 end
 
+---
+-- @name ensureInteger - Function that returns param if param is a integer else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureInteger(val)
+  if isInteger(val) then
+    return val
+  else
+    error("The value is not an integer.",2)
+  end
+end
+
+---
+-- @name isChar - Verifies if a value is a char
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a char
 local function isChar(val) 
   if isString(val) then
     return string.len(val) == 1  
   else
     return false
+  end
+end
+
+---
+-- @name ensureChar - Function that returns param if param is a char else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureChar(val)
+  if isChar(val) then
+    return val
+  else
+    error("The value is not an character string.", 2)
   end
 end
 
@@ -392,63 +508,6 @@ local function makeKeyValueTypeCheck(k, fnIsTypeOf)
   end
 end
 
-
-local function ensureString (val) 
-  if isString(val) then
-    return val
-  else
-    error("The value is not a string.", 2)
-  end
-end
-
-local function ensureBoolean (val) 
-  if isBoolean(val) then
-    return val
-  else
-    error("The value is not a boolean.", 2)
-  end
-end
-
-local function ensureUserdata (val) 
-  if isUserdata(val) then
-    return val
-  else
-    error("The value is not a userdata.", 2)
-  end
-end
-
-local function ensureTable (val) 
-  if isTable(val) then
-    return val
-  else
-    error("The value is not a table.", 2)
-  end
-end
-
-local function ensureFunction(val)
-  if isFunction(val) then
-    return val
-  else
-    error("The value is not a function.",2)
-  end
-end
-
-local function ensureInteger(val)
-  if isInteger(val) then
-    return val
-  else
-    error("The value is not an integer.",2)
-  end
-end
-
-local function ensureChar(val)
-  if isChar(val) then
-    return val
-  else
-    error("The value is not an character string.", 2)
-  end
-end
-
 local function ensureDigitChar(val)
   if isDigitChar(val) then
     return val
@@ -712,6 +771,7 @@ return {
   isTable = isTable,
   isFunction = isFunction,
   isInteger = isInteger,
+  isChar = isChar,
   isDigitChar = isDigitChar,
   isUpperAlphaChar = isUpperAlphaChar,
   isLowerAlphaChar = isLowerAlphaChar,
@@ -734,6 +794,7 @@ return {
   ensureTable = ensureTable,
   ensureFunction = ensureFunction,
   ensureInteger = ensureInteger,
+  ensureChar = ensureChar,
   ensureDigitChar = ensureDigitChar,
   ensureUpperAlphaChar = ensureUpperAlphaChar,
   ensureLowerAlphaChar = ensureLowerAlphaChar,

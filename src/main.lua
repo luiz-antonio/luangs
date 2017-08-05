@@ -1,7 +1,7 @@
 --- Test
 local ctg = require "luangs.fn.category"
 local function showErr(err)
-  print ("Error: " + err)
+  print ("###>Error: " + err)
 end
 local function doTest(name, cond, msg)
   local function fn ()

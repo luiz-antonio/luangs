@@ -226,6 +226,10 @@ local function ensureChar(val)
   end
 end
 
+---
+-- @name isDigitChar - Verifies if a value is a digit
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a char
 local function isDigitChar(val) 
   if isChar(val) then
     return val >= '0' and val <= '9'  
@@ -234,25 +238,88 @@ local function isDigitChar(val)
   end
 end
 
+---
+-- @name ensureDigitChar - Function that returns param if param is a digit char else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureDigitChar(val)
+  if isDigitChar(val) then
+    return val
+  else
+    error("The value is not an digit character string.",2)
+  end
+end
+
+---
+-- @name isUpperAlphaChar - Verifies if a value is upper alpha char
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a upper alpha char
 local function isUpperAlphaChar(val)
   if isChar(val) then
-    return val >= 'A' and val <= 'Z'  
+    local cod = string.byte(val)
+    return cod >= 65 and cod <= 90   
   else
     return false
   end
 end
 
+---
+-- @name ensureUpperAlphaChar - Function that returns param if param is a upper alpha char else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureUpperAlphaChar(val)
+  if isUpperAlphaChar(val) then
+    return val
+  else
+    error("The value is not an upper alphabetic character string.",2)
+  end
+end
+
+---
+-- @name isLowerAlphaChar - Verifies if a value is lower alpha char
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a lower alpha char
 local function isLowerAlphaChar(val)
   if isChar(val) then
-    return val >= 'a' and val <= 'z'  
+     local cod = string.byte(val)
+     return cod >= 97 and cod <= 122  
   else
     return false
   end
 end
 
+---
+-- @name ensureLowerAlphaChar - Function that returns param if param is a lower alpha char else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureLowerAlphaChar(val)
+  if isLowerAlphaChar(val) then
+    return val
+  else
+    error("The value is not a lower alphabetic character string.",2)
+  end
+end
+
+---
+-- @name isAlphaChar - Verifies if a value is an alpha char
+-- @param val (any) A value
+-- @return a boolean indicating if the value is an alpha char
 local function isAlphaChar(val)
   return isLowerAlphaChar(val) or isUpperAlphaChar(val)
 end
+
+---
+-- @name ensureAlphaChar - Function that returns param if param is an alpha char else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureAlphaChar(val)
+  if isAlphaChar(val) then
+    return val
+  else
+    error("The value is not an alphabetic character string.",2)
+  end
+end
+
 
 local function isUpperAlphaNumericChar(val)
   return isUpperAlphaChar(val) or isDigitChar(val)
@@ -505,38 +572,6 @@ local function makeKeyValueTypeCheck(k, fnIsTypeOf)
     end
   else
     error("The param key is not an not empty string.", 2)
-  end
-end
-
-local function ensureDigitChar(val)
-  if isDigitChar(val) then
-    return val
-  else
-    error("The value is not an digit character string.",2)
-  end
-end
-
-local function ensureUpperAlphaChar(val)
-  if isUpperAlphaChar(val) then
-    return val
-  else
-    error("The value is not an upper alphabetic character string.",2)
-  end
-end
-
-local function ensureLowerAlphaChar(val)
-  if isLowerAlphaChar(val) then
-    return valval
-  else
-    error("The value is not a lower alphabetic character string.",2)
-  end
-end
-
-local function ensureAlphaChar(val)
-  if isAlphaChar(val) then
-    return val
-  else
-    error("The value is not an alphabetic character string.",2)
   end
 end
 

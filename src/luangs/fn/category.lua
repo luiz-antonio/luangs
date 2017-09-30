@@ -169,7 +169,7 @@ local function isFunction(val) return type(val) == 'function' end
 ---
 -- @name ensureFunction - Function that returns param if param is a function else error
 -- @param val (any) A value
--- @return val(any)
+-- @return val (any)
 local function ensureFunction(val)
   if isFunction(val) then
     return val
@@ -320,10 +320,28 @@ local function ensureAlphaChar(val)
   end
 end
 
-
+---
+-- @name isAlphaChar - Verifies if a value is an upper alphanumeric char
+-- @param val (any) A value
+-- @return a boolean indicating if the value is an alpha char
 local function isUpperAlphaNumericChar(val)
   return isUpperAlphaChar(val) or isDigitChar(val)
 end
+
+---
+-- @name ensureUpperAlphaNumericChar - Function that returns param if param is an upper alphanueric char else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureUpperAlphaNumericChar(val)
+  if isUpperAlphaNumericChar(val) then
+    return val
+  else
+    error("The value is not an uppercase valalphanumeric character string.",2)
+  end
+end
+
+
+
 
 local function isLowerAlphaNumericChar(val)
   return isLowerAlphaChar(val) or isDigitChar(val)
@@ -402,6 +420,18 @@ local function isUpperAlphaNumericString(val)
     return true
   else
     return false
+  end
+end
+
+---
+-- @name ensureUpperAlphaNumericString - Function that returns param if param is an upper alphanueric char else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureUpperAlphaNumericString(val)
+  if isUpperAlphaNumericString(val) then
+    return val
+  else
+    error("The value is not an upper alphanumeric string.",2)
   end
 end
 
@@ -575,13 +605,7 @@ local function makeKeyValueTypeCheck(k, fnIsTypeOf)
   end
 end
 
-local function ensureUpperAlphaNumericChar(val)
-  if isUpperAlphaNumericChar(val) then
-    return val
-  else
-    error("The value is not an uppercase valalphanumeric character string.",2)
-  end
-end
+
 
 local function ensureLowerAlphaNumericChar(val)
   if isLowerAlphaNumericChar(val) then
@@ -628,14 +652,6 @@ local function ensureAlphaString(val)
     return val
   else
     error("The value is not an alphabetic string.",2)
-  end
-end
-
-local function ensureUpperAlphaNumericString(val)
-  if isUpperAlphaNumericString(val) then
-    return val
-  else
-    error("The value is not an upper alphanumeric string.",2)
   end
 end
 
@@ -844,4 +860,6 @@ return {
   ensureLowerAlphanumericString = ensureLowerAlphanumericString,
   ensureUpperAlphanumericString = ensureUpperAlphanumericString,
   ensureAlphanumericString =  ensureAlphanumericString,
+  isUpperAlphaNumericChar = isUpperAlphaNumericChar,
+  ensureUpperAlphaNumericChar = ensureUpperAlphaNumericChar
 }

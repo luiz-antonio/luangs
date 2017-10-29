@@ -159,7 +159,16 @@ local function test_ensureUpperAlphaNumericChar()
   local res2 = pcall(ctg.ensureUpperAlphaNumericChar, 'a')
   doTest("ensureUpperAlphaNumericChar-false", res2 == false, "Param is not of a right type")
 end
-
+local function test_isLowerAlphaNumericChar()
+  doTest("isLowerAlphaNumericChar-true", ctg.isLowerAlphaNumericChar('a'), "Param is not of the right type")
+  doTest("isLowerAlphaNumericChar-false", ctg.isLowerAlphaNumericChar('A') == false, "Param is not of the right type")
+end
+local function test_ensureLowerAlphaNumericChar()
+  local res1 = pcall(ctg.ensureLowerAlphaNumericChar, 'a')
+  doTest("ensureLowerAlphaNumericChar-true", res1 == true, "Param is not of a right type")
+  local res2 = pcall(ctg.ensureLowerAlphaNumericChar, 'A')
+  doTest("ensureLowerAlphaNumericChar-false", res2 == false, "Param is not of a right type")
+end
 
 local function main()
   test_ensureAny()
@@ -191,5 +200,7 @@ local function main()
   test_ensureAlphaChar()
   test_isUpperAlphaNumericChar()
   test_ensureUpperAlphaNumericChar()
+  test_isLowerAlphaNumericChar()
+  test_ensureLowerAlphaNumericChar()
 end
 main()

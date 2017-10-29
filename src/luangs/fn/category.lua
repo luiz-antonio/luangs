@@ -329,7 +329,7 @@ local function isUpperAlphaNumericChar(val)
 end
 
 ---
--- @name ensureUpperAlphaNumericChar - Function that returns param if param is an upper alphanueric char else error
+-- @name ensureUpperAlphaNumericChar - Function that returns param if param is an upper alphanumeric char else error
 -- @param val (any) A value
 -- @return val(any)
 local function ensureUpperAlphaNumericChar(val)
@@ -339,13 +339,27 @@ local function ensureUpperAlphaNumericChar(val)
     error("The value is not an uppercase valalphanumeric character string.",2)
   end
 end
-
-
-
-
+---
+-- @name isLowerAlphaNumericChar - Verifies if a value is an lower alphanumeric char
+-- @param val (any) A value
+-- @return a boolean indicating if the value is an alpha char
 local function isLowerAlphaNumericChar(val)
   return isLowerAlphaChar(val) or isDigitChar(val)
 end
+---
+-- @name ensureLowerAlphaNumericChar - Function that returns param if param is an lower alphanumeric char else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureLowerAlphaNumericChar(val)
+  if isLowerAlphaNumericChar(val) then
+    return val
+  else
+    error("The value is not a lowercase alphanumeric character string.",2)
+  end
+end
+
+
+
 
 local function isAlphaNumericChar(val)
   return isLowerAlphaNumericChar(val) or isUpperAlphaNumericChar(val)
@@ -607,13 +621,7 @@ end
 
 
 
-local function ensureLowerAlphaNumericChar(val)
-  if isLowerAlphaNumericChar(val) then
-    return val
-  else
-    error("The value is not a lowercase alphanumeric character string.",2)
-  end
-end
+
 
 local function ensureAlphaNumericChar(val)
   if isAlphaNumericChar(val) then
@@ -861,5 +869,7 @@ return {
   ensureUpperAlphanumericString = ensureUpperAlphanumericString,
   ensureAlphanumericString =  ensureAlphanumericString,
   isUpperAlphaNumericChar = isUpperAlphaNumericChar,
-  ensureUpperAlphaNumericChar = ensureUpperAlphaNumericChar
+  ensureUpperAlphaNumericChar = ensureUpperAlphaNumericChar,
+  isLowerAlphaNumericChar = isLowerAlphaNumericChar,
+  ensureLowerAlphaNumericChar = ensureLowerAlphaNumericChar
 }

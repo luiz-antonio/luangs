@@ -1,11 +1,11 @@
 --- --------------------------------------------------------------------------
--- @name luangs.fn.type
+-- @name luangs.fn.category
 -- 
--- @description Type library
+-- @description Cathegory library
 --   
 --  http://www.lags.pro.br
 --
---  @author Luiz Antonio Garcia Simões (LAGS)
+--  @author Luiz Antonio Garcia Simoes (LAGS)
 --
 --  This file is free for use of any kind and is distributed on an "AS IS" BASIS,
 --  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 

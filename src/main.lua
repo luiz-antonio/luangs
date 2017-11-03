@@ -1,5 +1,7 @@
 --- Test
 local ctg = require "luangs.fn.category"
+local coll = require "luangs.fn.collection"
+-- Test Cathegory
 local function showErr(err)
   print ("###>Error: " + err)
 end
@@ -170,6 +172,23 @@ local function test_ensureLowerAlphaNumericChar()
   doTest("ensureLowerAlphaNumericChar-false", res2 == false, "Param is not of a right type")
 end
 
+-- Test collection
+local function test_makeMapIterator ()
+  local dup = coll.makeMapIterator({1,2,3}, function(x) return x * 2 end)
+  local res = {}
+  for val in dup do
+    table.insert(res, #res + 1, val)
+  end
+  doTest("collection.MapIterator", #res == 3 and res[1] == 2 and res[3] == 6, "res must be equal {2,4,6} ")
+end
+local function test_makeReverseMapIterator ()
+  local dup = coll.makeReverseMapIterator({1,2,3}, function(x) return x * 2 end)
+  local res = {}
+  for val in dup do
+    table.insert(res, #res + 1, val)
+  end
+  doTest("collection.makeReverseMapIterator", #res == 3 and res[3] == 2 and res[1] == 6, "res must be equal {6,4,2} ")
+end
 local function main()
   test_ensureAny()
   test_makeTypeVerifier()
@@ -202,5 +221,7 @@ local function main()
   test_ensureUpperAlphaNumericChar()
   test_isLowerAlphaNumericChar()
   test_ensureLowerAlphaNumericChar()
+  test_makeMapIterator()
+  test_makeReverseMapIterator()
 end
 main()

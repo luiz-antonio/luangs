@@ -347,7 +347,7 @@ local function isLowerAlphaNumericChar(val)
   return isLowerAlphaChar(val) or isDigitChar(val)
 end
 ---
--- @name ensureLowerAlphaNumericChar - Function that returns param if param is an lower alphanumeric char else error
+-- @name ensureLowerAlphaNumericChar - Function that returns param if param is lower alphanumeric char else error
 -- @param val (any) A value
 -- @return val(any)
 local function ensureLowerAlphaNumericChar(val)
@@ -358,13 +358,29 @@ local function ensureLowerAlphaNumericChar(val)
   end
 end
 
-
-
-
+---
+-- @name isAlphaNumericChar - Verifies if a value is an alphanumeric char
+-- @param val (any) A value
+-- @return a boolean indicating if the value is an alpha char
 local function isAlphaNumericChar(val)
   return isLowerAlphaNumericChar(val) or isUpperAlphaNumericChar(val)
 end
 
+---
+-- @name ensureAlphaNumericChar - Function that returns param if param is an alphanumeric char else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureAlphaNumericChar(val)
+  if isAlphaNumericChar(val) then
+    return val
+  else
+    error("The value is not a lowercase alphanumeric character string.",2)
+  end
+end
+---
+-- @name isDigitString - Verifies if a value is a digit string
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a digit string
 local function isDigitString(val) 
   if isString(val) then
     for cnt = 1, string.len(val) do
@@ -376,7 +392,22 @@ local function isDigitString(val)
     return false
   end
 end
+---
+-- @name ensureDigitString - Function that returns param if param is a digit string else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureDigitString(val)
+  if isDigitString(val) then
+    return val
+  else
+    error("The value is not a digit string.",2)
+  end
+end
 
+---
+-- @name isUpperAlphaString - Verifies if a value is a upper alpha string
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a upper alpha string
 local function isUpperAlphaString(val)
   if isString(val) then
     for cnt = 1, string.len(val) do
@@ -388,7 +419,21 @@ local function isUpperAlphaString(val)
     return false
   end
 end
-
+---
+-- @name ensureUpperAlphaString - Function that returns param if param is a upper alpha string else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureUpperAlphaString(val)
+  if isUpperAlphaString(val) then
+    return val
+  else
+    error("The value is not an upper alphabetic string.",2)
+  end
+end
+---
+-- @name isLowerAlphaString - Verifies if a value is a lower alpha string
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a lower alpha string
 local function isLowerAlphaString(val)
   if isString(val) then
     for cnt = 1, string.len(val) do
@@ -400,7 +445,21 @@ local function isLowerAlphaString(val)
     return false
   end
 end
-
+---
+-- @name ensureLowerAlphaString - Function that returns param if param is a lower alpha string else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureLowerAlphaString(val)
+  if isLowerAlphaString(val) then
+    return val
+  else
+    error("The value is not a lower alphabetic string.",2)
+  end
+end
+---
+-- @name isAlphaString - Verifies if a value is a alpha string
+-- @param val (any) A value
+-- @return a boolean indicating if the value is a alpha string
 local function isAlphaString(val)
   if isString(val) then
     for cnt = 1, string.len(val) do
@@ -410,6 +469,17 @@ local function isAlphaString(val)
     return true
   else
     return false
+  end
+end
+---
+-- @name ensureAlphaString - Function that returns param if param is an alpha string else error
+-- @param val (any) A value
+-- @return val(any)
+local function ensureAlphaString(val)
+  if isAlphaString(val) then
+    return val
+  else
+    error("The value is not an alphabetic string.",2)
   end
 end
 
@@ -623,45 +693,11 @@ end
 
 
 
-local function ensureAlphaNumericChar(val)
-  if isAlphaNumericChar(val) then
-    return val
-  else
-    error("The value is not a lowercase alphanumeric character string.",2)
-  end
-end
 
-local function ensureDigitString(val)
-  if isDigitString(val) then
-    return val
-  else
-    error("The value is not a digit string.",2)
-  end
-end
 
-local function ensureUpperAlphaString(val)
-  if isUpperAlphaString(val) then
-    return val
-  else
-    error("The value is not an upper alphabetic string.",2)
-  end
-end
 
-local function ensureLowerAlphaString(val)
-  if isLowerAlphaString(val) then
-    return val
-  else
-    error("The value is not a lower alphabetic string.",2)
-  end
-end
 
-local function ensureAlphaString(val)
-  if isLowerString(val) then
-    return val
-  else
-    error("The value is not an alphabetic string.",2)
-  end
-end
+
 
 local function ensureLowerAlphaNumericString(val)
   if isLowerAlphaNumericString(val) then
@@ -871,5 +907,11 @@ return {
   isUpperAlphaNumericChar = isUpperAlphaNumericChar,
   ensureUpperAlphaNumericChar = ensureUpperAlphaNumericChar,
   isLowerAlphaNumericChar = isLowerAlphaNumericChar,
-  ensureLowerAlphaNumericChar = ensureLowerAlphaNumericChar
+  ensureLowerAlphaNumericChar = ensureLowerAlphaNumericChar,
+  isAlphaNumericChar = isLowerAlphaNumericChar,
+  ensureAlphaNumericChar = ensureAlphaNumericChar,
+  isUpperAlphaString = isUpperAlphaString,
+  ensureUpperAlphaString = ensureUpperAlphaString,
+  isLowerAlphaString = isLowerAlphaString,
+  ensureLowerAlphaString = ensureLowerAlphaString
 }
